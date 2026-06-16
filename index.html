@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Genesis | Brand Intelligence for Those Who Think Differently</title>
+<meta name="description" content="Nova Genesis builds autonomous brand intelligences for founders, operators, and serious traders who have something real to say.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap');
+
+  :root {
+    --void: #050508;
+    --deep: #0a0a12;
+    --surface: #0f0f1c;
+    --border: #1a1a2e;
+    --gold: #c9a84c;
+    --gold-dim: #b8922a;
+    --text: #e0dcd4;
+    --text-dim: #9a9590;
+    --text-bright: #ede8dc;
+    --indigo: #2a1f4e;
+    --indigo-light: #3d2f72;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  /* NAVIGATION */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(5,5,8,0.95);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 40%, rgba(42,31,78,0.4) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 300;
+    color: var(--text-bright);
+    line-height: 1.15;
+    max-width: 900px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--text-dim);
+    max-width: 600px;
+    margin-bottom: 3rem;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold);
+    color: var(--void);
+  }
+
+  .founder-rate {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.1em;
+  }
+
+  .founder-rate span {
+    color: var(--gold);
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold-dim), transparent);
+    margin: 0 auto;
+  }
+
+  /* SECTION */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 300;
+    color: var(--text-bright);
+    line-height: 1.3;
+    margin-bottom: 2rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  .section-body {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    max-width: 680px;
+    line-height: 1.9;
+  }
+
+  /* WHAT IT IS */
+  .what-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-top: 4rem;
+    border: 1px solid var(--border);
+  }
+
+  .what-cell {
+    background: var(--deep);
+    padding: 2.5rem;
+  }
+
+  .what-cell-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 1rem;
+  }
+
+  .what-cell-text {
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  .what-cell-text strong {
+    color: var(--text-bright);
+    font-weight: 400;
+  }
+
+  /* FOR WHOM */
+  .for-whom {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 4rem;
+    margin-top: 4rem;
+    position: relative;
+  }
+
+  .for-whom::before {
+    content: '"';
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    font-size: 8rem;
+    color: var(--border);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  .for-whom-text {
+    font-size: 1.3rem;
+    color: var(--text);
+    line-height: 1.9;
+    font-style: italic;
+    font-weight: 300;
+    max-width: 700px;
+  }
+
+  .for-whom-text strong {
+    color: var(--text-bright);
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  /* CAPABILITIES */
+  .capabilities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .cap-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    transition: border-color 0.3s;
+  }
+
+  .cap-card:hover { border-color: var(--gold-dim); }
+
+  .cap-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.2em;
+    margin-bottom: 0.75rem;
+  }
+
+  .cap-title {
+    font-size: 1.1rem;
+    color: var(--text-bright);
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+  }
+
+  .cap-desc {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* PRICING */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .price-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    position: relative;
+  }
+
+  .price-card.featured {
+    border-color: var(--gold-dim);
+    background: var(--indigo);
+  }
+
+  .price-tier {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 1rem;
+  }
+
+  .price-name {
+    font-size: 1.4rem;
+    color: var(--text-bright);
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+  }
+
+  .price-amount {
+    font-size: 2rem;
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 0.25rem;
+  }
+
+  .price-cadence {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 1.5rem;
+  }
+
+  .price-features {
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+
+  .price-features li {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .price-features li::before {
+    content: '--';
+    color: var(--gold-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .standalone-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .standalone-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 2rem;
+  }
+
+  .standalone-price {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.4rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .standalone-name {
+    font-size: 1.1rem;
+    color: var(--text-bright);
+    margin-bottom: 0.75rem;
+  }
+
+  .standalone-desc {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* INTAKE FORM */
+  .intake-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 4rem;
+    margin-top: 2rem;
+  }
+
+  .intake-intro {
+    font-size: 1rem;
+    color: var(--text-dim);
+    line-height: 1.9;
+    max-width: 600px;
+    margin-bottom: 3rem;
+    font-style: italic;
+  }
+
+  .form-group {
+    margin-bottom: 2rem;
+  }
+
+  .form-label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 0.75rem;
+  }
+
+  .form-sublabel {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 0.75rem;
+    font-style: italic;
+  }
+
+  .form-input, .form-textarea, .form-select {
+    width: 100%;
+    background: var(--deep);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 1rem 1.25rem;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    outline: none;
+  }
+
+  .form-input:focus, .form-textarea:focus, .form-select:focus {
+    border-color: var(--gold-dim);
+  }
+
+  .form-textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .form-select {
+    cursor: pointer;
+    appearance: none;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .submit-group {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .submit-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    margin-bottom: 1rem;
+  }
+
+  .footer-text {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .what-grid { grid-template-columns: 1fr; }
+    .standalone-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .intake-section { padding: 2rem; }
+    .for-whom { padding: 2.5rem; }
+    section { padding: 4rem 1.5rem; }
+  }
+
+  /* GOLD LINE ACCENT */
+  .gold-line {
+    width: 60px;
+    height: 1px;
+    background: var(--gold-dim);
+    margin-bottom: 2rem;
+  }
+
+  /* STATUS INDICATOR */
+  .status-bar {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    padding: 1.5rem;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--deep);
+    margin-bottom: 0;
+  }
+
+  .status-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .status-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--gold);
+  }
+
+  .status-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-logo">Nova Genesis</div>
+  <ul class="nav-links">
+    <li><a href="#what">What It Is</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#intake">Apply</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Nova Genesis / NovaSync Tsunami Systems</div>
+  <h1 class="hero-title">
+    Your brand deserves an intelligence,<br>
+    not a <em>content calendar.</em>
+  </h1>
+  <p class="hero-subtitle">
+    Nova Genesis builds autonomous brand intelligences for founders, operators, and serious traders
+    who have something real to say and no patience for noise.
+  </p>
+  <div class="hero-cta-group">
+    <a href="#intake" class="btn-primary">Submit Your Founding Myth</a>
+    <div class="founder-rate">
+      Founder Rate: <span>£2,500</span> for the first 3 clients.
+      <span>2 spots remaining.</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATUS BAR -->
+<div class="status-bar">
+  <div class="status-item">
+    <div class="status-value mono">9</div>
+    <div class="status-label">Intelligence Layers</div>
+  </div>
+  <div class="status-item">
+    <div class="status-value mono">10</div>
+    <div class="status-label">Attack Vectors Tested</div>
+  </div>
+  <div class="status-item">
+    <div class="status-value mono">7</div>
+    <div class="status-label">Post Architectures</div>
+  </div>
+  <div class="status-item">
+    <div class="status-value mono">SHA256</div>
+    <div class="status-label">Sealed Predictions</div>
+  </div>
+</div>
+
+<!-- WHAT IT IS -->
+<section id="what">
+  <div class="section-label">What Nova Genesis Is</div>
+  <h2 class="section-title">
+    Not a tool. Not an agency.<br>
+    A <em>brand intelligence</em> that thinks.
+  </h2>
+  <p class="section-body">
+    Every other AI content platform is a scheduler with a GPT wrapper. Nova Genesis is something
+    fundamentally different. We build you an autonomous entity with its own philosophy, memory,
+    voice, and market awareness. It reads your sector. It reasons before it speaks. It compounds
+    your authority while you build the thing that actually matters.
+  </p>
+
+  <div class="what-grid">
+    <div class="what-cell">
+      <div class="what-cell-label">What You Get</div>
+      <div class="what-cell-text">
+        A brand intelligence with <strong>your founding myth, your enemies, your refusals</strong>
+        baked into every word it generates. A Girardian reasoning chain that fires before every post,
+        asking what the crowd is doing and what someone outside the mechanism would notice instead.
+        Memory that compounds. A thesis that evolves. An Oracle your audience can interrogate directly.
+      </div>
+    </div>
+    <div class="what-cell">
+      <div class="what-cell-label">What You Do Not Get</div>
+      <div class="what-cell-text">
+        Generic content. Templated voices. A tool that requires your daily attention to function.
+        A strategy document that sits in a drawer. An agency that needs briefing every week.
+        <strong>Nova Genesis operates whether you are watching or not.</strong>
+        That is not a feature. That is the point.
+      </div>
+    </div>
+    <div class="what-cell">
+      <div class="what-cell-label">The Philosophical Foundation</div>
+      <div class="what-cell-text">
+        Nova Genesis is built on Girardian mimetic theory. Markets, audiences, and attention
+        are mimetic machines. Most brands follow the crowd without knowing it.
+        <strong>Nova Genesis is designed to diverge.</strong> Anti-mimetic by architecture.
+        The crowd cannot copy what it cannot map.
+      </div>
+    </div>
+    <div class="what-cell">
+      <div class="what-cell-label">The Proof Layer</div>
+      <div class="what-cell-text">
+        Every prediction your brand intelligence makes is <strong>sealed with a SHA256 timestamp.</strong>
+        When it proves correct, Nova surfaces the immutable record publicly. Your audience does not
+        just follow your brand. They watch it be proven right. That is not content marketing.
+        That is verifiable intelligence.
+      </div>
+    </div>
+  </div>
+
+  <div class="for-whom" style="margin-top:3rem;">
+    <p class="for-whom-text">
+      Nova Genesis is for the founder who has been thinking clearly for years but posting
+      inconsistently. For the trader who has genuine edge but no public presence to match it.
+      For the operator who knows their market better than anyone in the room but has never
+      found a voice that matches the sharpness of their thinking.
+      <strong>You have the intelligence. Nova Genesis gives it a permanent, compounding voice.</strong>
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CAPABILITIES -->
+<section id="capabilities">
+  <div class="section-label">Capabilities</div>
+  <h2 class="section-title">
+    Eight systems.<br>One <em>coherent intelligence.</em>
+  </h2>
+
+  <div class="capabilities-grid">
+    <div class="cap-card">
+      <div class="cap-number">01 / VOICE ARCHITECTURE</div>
+      <div class="cap-title">Girardian Reasoning Chain</div>
+      <div class="cap-desc">Before every post, Nova fires a three-question reasoning chain derived from Girardian mimetic theory. What is the crowd doing? What does someone outside the mechanism notice? What would your brand say with 90 seconds and no agenda? The post comes from question three.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-number">02 / MEMORY</div>
+      <div class="cap-title">Living Brand Intelligence</div>
+      <div class="cap-desc">Content memory, living thesis, open questions, series tracking, angle deduplication, and a brand journal that compounds over time. Nova remembers what it has said, what landed, and what the thesis has become. No other content system has memory architecture at this depth.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-number">03 / SECTOR INTELLIGENCE</div>
+      <div class="cap-title">Real-Time Domain Awareness</div>
+      <div class="cap-desc">Nova Genesis wires your brand instance to live sector intelligence feeds specific to your domain. Property, crypto, fintech, legal, B2B SaaS, fitness. Content generation becomes intelligence-driven, not just philosophically coherent.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-number">04 / ORACLE</div>
+      <div class="cap-title">Public Brand Intelligence Interface</div>
+      <div class="cap-desc">A public interface where your audience can query your brand intelligence directly. The Oracle responds in your brand voice with Girardian reasoning baked in. Every response is sealed and verifiable. Your audience does not just consume your content. They interrogate your thinking.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-number">05 / WITNESS</div>
+      <div class="cap-title">Immutable Prediction Record</div>
+      <div class="cap-desc">Every prediction your brand makes is sealed with a SHA256 timestamp before the outcome is known. When confirmed, Nova generates proof posts surfacing the immutable record. The call was made before the move. The seal is permanent. The record stands.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-number">06 / AUTONOMOUS REPLIES</div>
+      <div class="cap-title">Engagement Without Attention</div>
+      <div class="cap-desc">Nova monitors incoming engagement and generates replies in your brand voice. Every reply runs through the Girardian reasoning chain and a compliance gate before it posts. Maximum three autonomous replies per post. Scarcity is a feature, not a limitation.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-number">07 / BRAND AUTOPSY</div>
+      <div class="cap-title">Pre-Build Intelligence Analysis</div>
+      <div class="cap-desc">Before we build your instance, Nova analyses your existing social presence. Originality score, mimetic alignment, dominant angles, dead angles, positioning gaps. You see your brand the way the mechanism sees it before we change it.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-number">08 / ADVERSARIAL TEST</div>
+      <div class="cap-title">Pre-Launch Brand Stress Test</div>
+      <div class="cap-desc">Ten attack vectors. Impersonation, regulatory bait, narrative hijack, reputational ambush, audience betrayal. We show you the most damaging content an adversary could deploy in your brand voice before the market does. No other brand service on earth offers this.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-label">Pricing</div>
+  <h2 class="section-title">
+    Structured for those<br>who are <em>serious.</em>
+  </h2>
+  <p class="section-body">
+    Nova Genesis is not priced for experimentation. It is priced for operators who understand
+    that compounding brand authority is infrastructure, not a cost centre.
+  </p>
+
+  <!-- STANDALONE PRODUCTS -->
+  <div class="section-label" style="margin-top:3rem;">Standalone Products</div>
+  <div class="standalone-grid">
+    <div class="standalone-card">
+      <div class="standalone-price">£497</div>
+      <div class="standalone-name">Brand Autopsy</div>
+      <div class="standalone-desc">
+        90-day social intelligence analysis. Girardian scoring across all content.
+        Originality index, mimetic alignment score, dead angle detection, positioning gap analysis.
+        Delivered before any build begins. Standalone or as Genesis pre-build.
+      </div>
+    </div>
+    <div class="standalone-card">
+      <div class="standalone-price">£997</div>
+      <div class="standalone-name">Adversarial Brand Test</div>
+      <div class="standalone-desc">
+        Ten-vector pre-launch attack simulation. Impersonation, regulatory bait, narrative hijack,
+        reputational ambush, and six further vectors. Full damage assessment and pre-launch checklist.
+        Run before any public launch. The most comprehensive brand security audit available.
+      </div>
+    </div>
+  </div>
+
+  <!-- GENESIS TIERS -->
+  <div class="section-label" style="margin-top:3rem;">Genesis Instance Tiers</div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-tier">Tier 1</div>
+      <div class="price-name">Brand Genesis</div>
+      <div class="price-amount">£3,500</div>
+      <div class="price-cadence">one-time / founder rate £2,500</div>
+      <ul class="price-features">
+        <li>Full voice architecture from your founding myth</li>
+        <li>Girardian reasoning chain configured for your sector</li>
+        <li>Seven post format library</li>
+        <li>Content memory and living thesis initialised</li>
+        <li>NCL compliance gate for your sector regulator</li>
+        <li>Autonomous pipeline handed over and running</li>
+        <li>Brand Autopsy included</li>
+      </ul>
+      <a href="#intake" class="btn-primary" style="display:block;text-align:center;">Apply for Genesis</a>
+    </div>
+
+    <div class="price-card featured">
+      <div class="price-tier">Tier 2 -- Most Popular</div>
+      <div class="price-name">Brand Entity Managed</div>
+      <div class="price-amount">£497</div>
+      <div class="price-cadence">per month / 3 month minimum</div>
+      <ul class="price-features">
+        <li>Everything in Brand Genesis</li>
+        <li>We run the pipeline on your behalf</li>
+        <li>Monthly performance report</li>
+        <li>Living thesis updated monthly</li>
+        <li>Nova as Witness -- all predictions sealed</li>
+        <li>Autonomous reply engine active</li>
+        <li>Brand Autopsy and Adversarial Test included</li>
+      </ul>
+      <a href="#intake" class="btn-primary" style="display:block;text-align:center;">Apply for Managed</a>
+    </div>
+
+    <div class="price-card">
+      <div class="price-tier">Tier 3</div>
+      <div class="price-name">Brand Intelligence Pro</div>
+      <div class="price-amount">£997</div>
+      <div class="price-cadence">per month / 6 month minimum</div>
+      <ul class="price-features">
+        <li>Everything in Brand Entity Managed</li>
+        <li>Live sector intelligence feed wired to your domain</li>
+        <li>Brand Oracle public interface</li>
+        <li>Quarterly positioning reports</li>
+        <li>Nova Network Intelligence Briefing</li>
+        <li>Priority build access for new format types</li>
+        <li>All standalone products included</li>
+      </ul>
+      <a href="#intake" class="btn-primary" style="display:block;text-align:center;">Apply for Pro</a>
+    </div>
+  </div>
+
+  <!-- ADD-ONS -->
+  <div class="section-label" style="margin-top:3rem;">Add-Ons</div>
+  <div class="standalone-grid">
+    <div class="standalone-card">
+      <div class="standalone-price">£97<span style="font-size:1rem;color:var(--text-dim)">/month</span></div>
+      <div class="standalone-name">Nova Network Intelligence Briefing</div>
+      <div class="standalone-desc">
+        Monthly Girardian collective intelligence briefing across all active Nova Genesis instances.
+        Anonymised pattern detection across sectors. What no single instance could see alone.
+        Available to all active clients.
+      </div>
+    </div>
+    <div class="standalone-card">
+      <div class="standalone-price">£500<span style="font-size:1rem;color:var(--text-dim)">/year</span></div>
+      <div class="standalone-name">Living Brand Grimoire</div>
+      <div class="standalone-desc">
+        Your brand intelligence's accumulated memory, thesis evolution, and public prediction record
+        printed, bound, and delivered annually. The only brand artefact that proves your thinking
+        compounded in public. No digital tool has ever produced this.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INTAKE -->
+<section id="intake">
+  <div class="section-label">The Initiation</div>
+  <h2 class="section-title">
+    Nova Genesis is not<br>
+    available to <em>everyone.</em>
+  </h2>
+
+  <div class="intake-section">
+    <p class="intake-intro">
+      Submit your brand's founding myth below. We will review it and tell you whether your brand
+      is a candidate for Nova Genesis. This is not a contact form. It is the beginning of the
+      build process. Answer with the precision you would want your brand intelligence to inherit.
+    </p>
+
+    <form name="nova-genesis-intake" method="POST" data-netlify="true" action="/thank-you">
+      <input type="hidden" name="form-name" value="nova-genesis-intake">
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="brand-name">Brand or Company Name</label>
+          <input class="form-input" type="text" id="brand-name" name="brand_name" required placeholder="What do you call it">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="sector">Sector</label>
+          <select class="form-select form-input" id="sector" name="sector" required>
+            <option value="">Select your sector</option>
+            <option value="crypto">Crypto / Web3</option>
+            <option value="fintech">Fintech / Finance</option>
+            <option value="property">Property / Real Estate</option>
+            <option value="b2b_saas">B2B SaaS</option>
+            <option value="legal">Legal</option>
+            <option value="fitness">Fitness / Wellness</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="founding-myth">Your Founding Myth</label>
+        <span class="form-sublabel">Why does this brand exist. Not what it sells. The moment of origin. The thing that made this necessary.</span>
+        <textarea class="form-textarea" id="founding-myth" name="founding_myth" required placeholder="Write it plainly. Nova will read it."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="brand-enemies">What You Oppose</label>
+        <span class="form-sublabel">What forces, ideas, or behaviours does this brand exist to fight against. Not competitors. The thing in the world that made this brand necessary.</span>
+        <textarea class="form-textarea" id="brand-enemies" name="brand_enemies" required placeholder="Be specific. Vague enemies produce vague brands."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="audience-secret">What Your Audience Secretly Knows</label>
+        <span class="form-sublabel">What does your audience already believe that nobody in your space is saying publicly yet.</span>
+        <textarea class="form-textarea" id="audience-secret" name="audience_secret" required placeholder="The thing they know but have no language for yet."></textarea>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="tier">Tier of Interest</label>
+          <select class="form-select form-input" id="tier" name="tier" required>
+            <option value="">Select a tier</option>
+            <option value="autopsy">Brand Autopsy only (£497)</option>
+            <option value="adversarial">Adversarial Brand Test only (£997)</option>
+            <option value="tier1">Tier 1 -- Brand Genesis (£2,500 founder / £3,500)</option>
+            <option value="tier2">Tier 2 -- Brand Entity Managed (£497/month)</option>
+            <option value="tier3">Tier 3 -- Brand Intelligence Pro (£997/month)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Contact Email</label>
+          <input class="form-input" type="email" id="email" name="email" required placeholder="Where Nova can reach you">
+        </div>
+      </div>
+
+      <div class="submit-group">
+        <button type="submit" class="btn-primary">Submit to Nova Genesis</button>
+        <div class="submit-note">
+          We review every submission personally. You will hear back within 48 hours.
+          If your brand is a candidate, we begin immediately.
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Nova Genesis / NovaSync Tsunami Systems</div>
+  <div class="footer-text">Brand intelligence for those who think differently.</div>
+  <ul class="footer-links">
+    <li><a href="https://mytenantstack.co.uk">TenantStack</a></li>
+    <li><a href="mailto:nova@novasyncts.com">Contact</a></li>
+    <li><a href="#intake">Apply</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
